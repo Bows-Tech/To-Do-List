@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>Mi Lista d<em>e Tareas</em></h1>
+        <p class="date" id="today-date"></p>
+      </header>
+
+      <!-- Input de nueva tarea -->
+      <div class="input-wrap">
+        <input
+          type="text"
+          id="task-input"
+          class="task-input"
+          placeholder="Agregar nueva tarea..."
+          maxlength="80"
+          autocomplete="off"
+        />
+        <button id="add-btn" class="add-btn" aria-label="Agregar tarea">
+          +
+        </button>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="pending">Pendientes</button>
+        <button class="filter-btn" data-filter="done">Completadas</button>
+      </div>
+
+      <!-- Lista de tareas -->
+      <ul class="task-list" id="task-list">
+        <!-- Las tareas se renderizan aquí con JS -->
+      </ul>
+
+      <!-- Estado vacío -->
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">✦</div>
+        <p>No hay tareas aquí</p>
+      </div>
+
+      <!-- Footer de la app -->
+      <footer class="app-footer">
+        <span id="count-label">0 tareas pendientes</span>
+        <button id="clear-btn" class="clear-btn">Borrar completadas</button>
+      </footer>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
