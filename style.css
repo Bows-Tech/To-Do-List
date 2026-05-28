@@ -3,54 +3,134 @@
    ============================================= */
 
 :root {
-  --bg: #f5f0e8;
+  --bg: #f2ece3;
   --surface: #ffffff;
   --text: #1a1a1a;
-  --text-muted: #888;
-  --accent: #ff4d2e;
-  --accent-light: rgba(255, 77, 46, 0.1);
+  --text-muted: #999;
+  --accent: #e84c1e;
+  --accent-light: rgba(232, 76, 30, 0.1);
   --done-color: #b0a99a;
-  --border: #e8e0d4;
-  --shadow: 0 4px 24px rgba(0,0,0,0.07);
-  --font: 'Syne', sans-serif;
-  --font-display: 'Bebas Neue', cursive;
-  --font-mono: 'Syne Mono', monospace;
+  --border: #e0d8cc;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --font: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-display: 'Unbounded', sans-serif;
   --radius: 16px;
   --transition: 0.25s ease;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   background: var(--bg);
   min-height: 100vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 3rem 1rem 4rem;
+  padding: 3rem 1.5rem 5rem;
   font-family: var(--font);
 }
 
 .app {
   width: 100%;
-  max-width: 540px;
+  max-width: 580px;
 }
 
-/* ===== HEADER ===== */
-.app-header { margin-bottom: 2rem; }
-.app-header h1 {
-  font-size: clamp(2.5rem, 8vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--text);
+/* ===== HEADER / TÍTULO ===== */
+.app-header {
+  margin-bottom: 2.5rem;
 }
-.app-header h1 em { color: var(--accent); font-style: italic; }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Fila 1: ( Mi Lista de ) */
+.title-row--1 {
+  gap: 0.15em;
+  margin-bottom: -0.05em;
+}
+
+/* Fila 2: ✦ Tareas ) ~~~ */
+.title-row--2 {
+  gap: 0.12em;
+  align-items: flex-end;
+}
+
+/* Paréntesis en rojo */
+.paren {
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  display: inline-block;
+}
+
+.paren-left {
+  font-size: clamp(3.8rem, 12vw, 6.5rem);
+  /* el paréntesis izquierdo está en la fila 1 */
+}
+
+.paren-right-top {
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  margin-left: 0.1em;
+  align-self: flex-start;
+  margin-top: 0.1em;
+}
+
+.paren-right-bottom {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  align-self: flex-end;
+  margin-bottom: -0.05em;
+}
+
+/* Texto negro "Mi Lista de" */
+.title-black {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 6.5vw, 3.8rem);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Texto rojo itálico "Tareas" */
+.title-red {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(2.6rem, 9vw, 5rem);
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Estrella pequeña */
+.spark {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-right: 0.2em;
+  align-self: center;
+  margin-bottom: 0.6em;
+}
+
+/* Línea curva SVG */
+.curl {
+  width: clamp(55px, 12vw, 90px);
+  margin-bottom: 0.4em;
+  margin-left: 0.2em;
+  flex-shrink: 0;
+}
+
+/* Fecha */
 .date {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: 0.4rem;
-  text-transform: capitalize;
+  margin-top: 0.6rem;
+  letter-spacing: 0.01em;
 }
 
 /* ===== INPUT ===== */
@@ -59,11 +139,12 @@ body {
   gap: 0.75rem;
   margin-bottom: 1.2rem;
 }
+
 .task-input {
   flex: 1;
-  padding: 1rem 1.2rem;
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
   background: var(--surface);
   font-family: var(--font);
   font-size: 0.95rem;
@@ -76,13 +157,14 @@ body {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-light);
 }
+
 .add-btn {
-  width: 52px; height: 52px;
-  border-radius: var(--radius);
+  width: 54px; height: 54px;
+  border-radius: 16px;
   background: var(--accent);
   color: white;
   border: none;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 300;
   cursor: pointer;
   transition: all var(--transition);
@@ -90,24 +172,26 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  line-height: 1;
 }
-.add-btn:hover { background: #e03a1e; transform: scale(1.05); }
+.add-btn:hover { background: #c43a10; transform: scale(1.05); }
 .add-btn:active { transform: scale(0.97); }
 
 /* ===== FILTROS ===== */
 .filters {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
 }
+
 .filter-btn {
-  padding: 0.45rem 1rem;
+  padding: 0.5rem 1.2rem;
   border-radius: 999px;
-  border: 2px solid var(--border);
+  border: 1.5px solid var(--border);
   background: transparent;
   font-family: var(--font);
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition);
@@ -124,25 +208,23 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
-/* Tarea individual */
 .task-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   padding: 1rem 1.2rem;
   transition: all var(--transition);
   animation: slideIn 0.3s ease both;
 }
-.task-item:hover { border-color: #d4ccc0; box-shadow: var(--shadow); }
-.task-item.done { background: #faf8f4; opacity: 0.75; }
+.task-item:hover { border-color: #ccc4b6; box-shadow: var(--shadow); }
+.task-item.done { background: #faf7f2; opacity: 0.72; }
 
-/* Checkbox custom */
 .task-check {
   width: 22px; height: 22px;
   border: 2px solid var(--border);
@@ -153,13 +235,10 @@ body {
   align-items: center;
   justify-content: center;
   transition: all var(--transition);
-  background: transparent;
 }
 .task-check:hover { border-color: var(--accent); }
-.task-item.done .task-check {
-  background: var(--accent);
-  border-color: var(--accent);
-}
+.task-item.done .task-check { background: var(--accent); border-color: var(--accent); }
+
 .task-check-inner {
   width: 5px; height: 9px;
   border-right: 2px solid white;
@@ -170,7 +249,6 @@ body {
 }
 .task-item.done .task-check-inner { opacity: 1; }
 
-/* Texto de la tarea */
 .task-text {
   flex: 1;
   font-size: 0.95rem;
@@ -184,12 +262,11 @@ body {
   text-decoration-color: var(--done-color);
 }
 
-/* Botón eliminar */
 .task-delete {
   background: none;
   border: none;
   color: var(--border);
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   padding: 0.2rem;
   line-height: 1;
@@ -202,11 +279,11 @@ body {
 .empty-state {
   display: none;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 3.5rem 1rem;
   color: var(--text-muted);
 }
 .empty-state.show { display: block; }
-.empty-icon { font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.4; }
+.empty-icon { font-size: 1.6rem; margin-bottom: 0.75rem; opacity: 0.35; }
 .empty-state p { font-size: 0.88rem; }
 
 /* ===== FOOTER ===== */
@@ -214,9 +291,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 2px solid var(--border);
+  margin-top: 1.8rem;
+  padding-top: 1.2rem;
+  border-top: 1.5px solid var(--border);
 }
 #count-label {
   font-family: var(--font-mono);
@@ -237,92 +314,14 @@ body {
 
 /* ===== ANIMACIONES ===== */
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pop {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.04); }
-  100% { transform: scale(1); }
-}
-.pop { animation: pop 0.2s ease; }
-
 /* ===== RESPONSIVE ===== */
-@media (max-width: 400px) {
-  body { padding: 2rem 0.75rem; }
-}
-
-/* ===== TÍTULO REDISEÑADO ===== */
-.app-header { margin-bottom: 2rem; }
-
-.title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  position: relative;
-  margin-bottom: 0.5rem;
-}
-
-.title-paren {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(5rem, 16vw, 8rem);
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.85;
-  user-select: none;
-}
-.title-paren--left { margin-right: 0.1em; }
-.title-paren--right {
-  font-size: clamp(3.5rem, 11vw, 6rem);
-  align-self: flex-end;
-  margin-left: 0.1em;
-}
-
-.title-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.title-line1 {
-  display: flex;
-  align-items: center;
-  gap: 0.35em;
-}
-
-.title-spark {
-  font-size: 1rem;
-  color: var(--text);
-}
-
-.title-text1 {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(2.8rem, 9vw, 5rem);
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: 0.01em;
-}
-
-.title-line2 {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.1em;
-  position: relative;
-}
-
-.title-text2 {
-  font-family: 'Bebas Neue', cursive;
-  font-size: clamp(3.2rem, 11vw, 6rem);
-  color: var(--accent);
-  font-style: italic;
-  line-height: 1;
-  letter-spacing: 0.01em;
-}
-
-.title-curl {
-  width: clamp(50px, 10vw, 80px);
-  margin-bottom: 0.5em;
-  opacity: 0.7;
-  flex-shrink: 0;
+@media (max-width: 420px) {
+  body { padding: 2rem 1rem 4rem; }
+  .title-black { font-size: 1.8rem; }
+  .title-red   { font-size: 2.4rem; }
+  .paren-left  { font-size: 3.5rem; }
 }
